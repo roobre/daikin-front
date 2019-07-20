@@ -1,70 +1,66 @@
-import React from 'react';
-import { Container, Grid, Button, Icon, Label, Input } from 'semantic-ui-react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFan, faTintSlash } from '@fortawesome/free-solid-svg-icons'
-import './App.css';
+import React, {Component} from 'react'
+import {Container, Grid, Button, Icon, Label, Input} from 'semantic-ui-react'
+import './controls/Mode'
+import './App.css'
+import Mode from "./controls/Mode";
+import FanSpeed from "./controls/FanSpeed";
+import Temperature from './controls/Temperature';
+import Swing from "./controls/Swing";
 
-function App() {
-  return (
-    <Container style={{ marginTop: '1em' }}>
-      <Grid>
-      <Grid.Column width={13} textAlign='left'>
-          <Label size='large'>AC Remote 2: Electric Boogaloo</Label>
-        </Grid.Column>
-        <Grid.Column width={3} textAlign='right'>
-          <Label size='large' color='green' icon={{name: 'signal', fitted: true}} />
-        </Grid.Column>
 
-        <Grid.Column width={16} stretched>
-          <Button.Group size='large'>
-            <Button><FontAwesomeIcon icon={faFan} /></Button>
-            <Button icon='snowflake outline' primary />
-            <Button><FontAwesomeIcon icon={faTintSlash} /></Button>
-          </Button.Group>
-        </Grid.Column>
+class App extends Component {
+    state = {
+        ac: {
+            mode: null,
+            fanSpeed: null,
+            temp: 20,
+            swing: {
+                vertical: false,
+                horizontal: true,
+            },
+            powered: true
+        }
+    };
 
-        <Grid.Column width={16} stretched>
-          <Button.Group size='large'>
-            <Button icon={<FontAwesomeIcon icon={faFan} style={{ fontSize: '0.7em' }} />} />
-            <Button icon={<FontAwesomeIcon icon={faFan} style={{ fontSize: '0.8em' }} />} />
-            <Button icon={<FontAwesomeIcon icon={faFan} style={{ fontSize: '1em' }} />} />
-            <Button icon={<FontAwesomeIcon icon={faFan} style={{ fontSize: '1.2em' }} />} />
-            <Button icon={<FontAwesomeIcon icon={faFan} style={{ fontSize: '1.4em' }} />} />
-          </Button.Group>
-          <Button.Group size='large'>
-            <Button icon='moon' />
-            <Button content='Auto' primary />
-          </Button.Group>
-        </Grid.Column>
+    pushState(acState) {
+        console.log('Send to backend placeholder');
+        this.setState((oldState) => {
+            oldState.ac = Object.assign(oldState.ac, acState)
+            return oldState
+        });
+    }
 
-        <Grid.Column width={16} stretched >
-          <Input size='big' type='number' labelPosition='right'>
-            <Label icon='thermometer' />
-            <input value='23' />
-            {/* <Label content='°C' /> */}
-            <Button.Group size='big'>
-              <Button icon='plus' />
-              <Button icon='minus' />
-            </Button.Group>
-          </Input>
-        </Grid.Column>
+    render() {
+        return (
+            <Container style={{marginTop: '1em'}}>
+                <Grid>
+                    <Grid.Column width={13} textAlign='left'>
+                        <Label size='large'>AC Remote 2: Electric Boogaloo</Label>
+                    </Grid.Column>
+                    <Grid.Column width={3} textAlign='right'>
+                        <Label size='large' color='green' icon={{name: 'signal', fitted: true}}/>
+                    </Grid.Column>
 
-        <Grid.Row columns='equal'>
-          <Grid.Column stretched >
-            <Button size='large' primary icon={<Icon name='resize vertical' size='large' />} />
-          </Grid.Column>
-          <Grid.Column stretched >
-            <Button size='large' icon={<Icon name='resize horizontal' size='large' />} />
-          </Grid.Column>
-        </Grid.Row>
+                    <Mode currentMode={this.state.ac.mode} setMode={(mode) => this.pushState({mode: mode})}/>
 
-        <Grid.Column width={16} stretched>
-          <Button color='red' icon='power' />
-        </Grid.Column>
+                    <FanSpeed currentSpeed={this.state.ac.fanSpeed}
+                              setSpeed={(speed) => this.pushState({fanSpeed: speed})}/>
 
-      </Grid>
-    </Container >
-  );
+                    <Temperature currentTemp={this.state.ac.temp} setTemp={(temp) => this.pushState({temp: temp})}/>
+
+                    <Swing swingV={this.state.ac.swing.vertical} swingH={this.state.ac.swing.horizontal}
+                           setSwing={(v, h) => this.pushState({swing: {vertical: v, horizontal: h}})}/>
+
+                    <Grid.Column width={16} stretched>
+                        <Button color={this.state.ac.powered ? 'red' : 'green'} icon='power'
+                                onClick={() => this.pushState({powered: !this.state.ac.powered})}/>
+                    </Grid.Column>
+
+                </Grid>
+            </Container>
+        );
+    }
 }
+
 
 export default App;
