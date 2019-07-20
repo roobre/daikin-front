@@ -11,8 +11,8 @@ import Swing from "./controls/Swing";
 class App extends Component {
     state = {
         ac: {
-            mode: null,
-            fanSpeed: null,
+            mode: 'cool',
+            fanSpeed: 2,
             temp: 20,
             swing: {
                 vertical: false,
