@@ -40,21 +40,28 @@ class App extends Component {
     }
 
     render() {
-        let controls = <Grid.Column width={16}><Segment placeholder loading/></Grid.Column>
-
+        let controls;
         if (this.state.ac != null) {
             controls = [
-                <Mode currentMode={this.state.ac.mode} setMode={(mode) => this.pushState({mode: mode})}/>,
-                <FanSpeed currentSpeed={this.state.ac.fanSpeed}
+                <Mode key='mode'
+                      currentMode={this.state.ac.mode}
+                      setMode={(mode) => this.pushState({mode: mode})}/>,
+                <FanSpeed key='fs'
+                          currentSpeed={this.state.ac.fanSpeed}
                           setSpeed={(speed) => this.pushState({fanSpeed: speed})}/>,
-                <Temperature currentTemp={this.state.ac.temp} setTemp={(temp) => this.pushState({temp: temp})}/>,
-                <Swing swingV={this.state.ac.swing.vertical} swingH={this.state.ac.swing.horizontal}
+                <Temperature key='temp'
+                             currentTemp={this.state.ac.temp}
+                             setTemp={(temp) => this.pushState({temp: temp})}/>,
+                <Swing key='swing'
+                       swingV={this.state.ac.swing.vertical} swingH={this.state.ac.swing.horizontal}
                        setSwing={(v, h) => this.pushState({swing: {vertical: v, horizontal: h}})}/>,
-                <Grid.Column width={16} stretched>
+                <Grid.Column key='power' width={16} stretched>
                     <Button color={this.state.ac.powered ? 'red' : 'green'} icon='power'
                             onClick={() => this.pushState({powered: !this.state.ac.powered})}/>
                 </Grid.Column>,
-            ];
+            ]
+        } else {
+            controls = <Grid.Column width={16}><Segment placeholder loading/></Grid.Column>
         }
 
         return (
@@ -69,7 +76,6 @@ class App extends Component {
                     </Grid.Column>
 
                     {controls}
-
                 </Grid>
             </Container>
         );
