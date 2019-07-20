@@ -8,8 +8,11 @@ function App() {
   return (
     <Container style={{ marginTop: '1em' }}>
       <Grid>
-        <Grid.Column width={16} textAlign='right'>
+      <Grid.Column width={13} textAlign='left'>
           <Label size='large'>AC Remote 2: Electric Boogaloo</Label>
+        </Grid.Column>
+        <Grid.Column width={3} textAlign='right'>
+          <Label size='large' color='green' icon={{name: 'signal', fitted: true}} />
         </Grid.Column>
 
         <Grid.Column width={16} stretched>
@@ -46,12 +49,14 @@ function App() {
           </Input>
         </Grid.Column>
 
-        <Grid.Column width={8} stretched >
-          <Button size='large' icon='resize vertical' />
-        </Grid.Column>
-        <Grid.Column width={8} stretched >
-          <Button size='large' icon='resize horizontal' />
-        </Grid.Column>
+        <Grid.Row columns='equal'>
+          <Grid.Column stretched >
+            <Button size='large' primary icon={<Icon name='resize vertical' size='large' />} />
+          </Grid.Column>
+          <Grid.Column stretched >
+            <Button size='large' icon={<Icon name='resize horizontal' size='large' />} />
+          </Grid.Column>
+        </Grid.Row>
 
         <Grid.Column width={16} stretched>
           <Button color='red' icon='power' />
