@@ -1,88 +1,59 @@
-import React, { Component } from 'react'
-import { Container, Grid, Button, Label, Segment, Menu, Divider, Dropdown, Input } from 'semantic-ui-react'
-import './controls/Mode'
+import React, {Component} from 'react'
 import './App.css'
-import Mode from "./controls/Mode";
-import FanSpeed from "./controls/FanSpeed";
-import Temperature from './controls/Temperature';
-import Swing from "./controls/Swing";
-
+import Remote from "./Remote";
+import {Container, Grid, Label, Menu} from "semantic-ui-react";
 
 class App extends Component {
     constructor(props) {
         super(props);
-        setTimeout(() => {
-            this.setState({
-                ac: {
-                    mode: 'cool',
-                    fanSpeed: 2,
-                    temp: 20,
-                    swing: {
-                        vertical: false,
-                        horizontal: true,
-                    },
-                    powered: true
-                }
-            })
-        }, 1000)
-    }
 
-    state = {
-        ac: null
-    };
+        this.remotes = {
+            livingroom: <Remote path='livingRoom'/>,
+            dorm: <Remote path='dorm'/>
+        };
 
-    pushState(acState) {
-        console.log('Send to backend placeholder');
-        this.setState((oldState) => {
-            oldState.ac = Object.assign(oldState.ac, acState)
-            return oldState
-        });
+        this.state = {
+            currentRemote: this.remotes.livingroom
+        }
     }
 
     render() {
-        let controls;
-        if (this.state.ac != null) {
-            controls = (
-                <Grid>
-                    <Mode key='mode'
-                        currentMode={this.state.ac.mode}
-                        setMode={(mode) => this.pushState({ mode: mode })} />
-                    <FanSpeed key='fs'
-                        currentSpeed={this.state.ac.fanSpeed}
-                        setSpeed={(speed) => this.pushState({ fanSpeed: speed })} />
-                    <Temperature key='temp'
-                        currentTemp={this.state.ac.temp}
-                        setTemp={(temp) => this.pushState({ temp: temp })} />
-                    <Swing key='swing'
-                        swingV={this.state.ac.swing.vertical} swingH={this.state.ac.swing.horizontal}
-                        setSwing={(v, h) => this.pushState({ swing: { vertical: v, horizontal: h } })} />
-                    <Grid.Column key='power' width={16} stretched>
-                        <Button color={this.state.ac.powered ? 'red' : 'green'} icon='power'
-                            onClick={() => this.pushState({ powered: !this.state.ac.powered })} />
-                    </Grid.Column>
-                </Grid>
+        let remotes = [];
+
+        // TODO: React does not keep unrendered components in memory, so I use this ugly hack. It must be a better way to do this
+        for (let remote in this.remotes) {
+            remotes.push(
+                <div style={this.state.currentRemote !== this.remotes[remote] ? {display: 'none'} : null} key={remote}>
+                    {this.remotes[remote]}
+                </div>
             )
-        } else {
-            controls = <Grid.Column width={16}><Segment placeholder loading /></Grid.Column>
         }
 
         return (
-            <Container style={{ marginTop: '1em' }}>
+            <Container style={{marginTop: '1em'}}>
                 <Grid>
                     <Grid.Column width={13} textAlign='left'>
                         <Label size='large'>AC Remote 2: Electric Boogaloo</Label>
                     </Grid.Column>
                     <Grid.Column width={3} textAlign='right'>
-                        <Label size='large' color={this.state.ac != null ? 'green' : 'red'}
-                            icon={{ name: 'signal', fitted: true }} />
+                        <Label size='large' color={true ? 'green' : 'red'}
+                               icon={{name: 'signal', fitted: true}}/>
                     </Grid.Column>
                 </Grid>
                 <Menu pointing secondary>
-                    <Menu.Item active>Salón</Menu.Item>
-                    <Menu.Item disabled>Habitación</Menu.Item>
+                    <Menu.Item
+                        active={this.state.currentRemote === this.remotes.livingroom}
+                        onClick={() => this.setState({currentRemote: this.remotes.livingroom})}>
+                        Salón
+                    </Menu.Item>
+                    <Menu.Item
+                        active={this.state.currentRemote === this.remotes.dorm}
+                        onClick={() => this.setState({currentRemote: this.remotes.dorm})}>
+                        Dormitorio
+                    </Menu.Item>
                 </Menu>
-                {controls}
-            </Container >
+                {remotes}
+            </Container>
         );
     }
 }
