@@ -31,15 +31,15 @@ class App extends Component {
         this.remotes.forEach(remote => {
             remoteMenuItems.push(
                 <Menu.Item key={remote.name + '|' + remote.path}
-                    active={this.state.currentRemote === remote}
-                    onClick={() => this.setState({currentRemote: remote})}>
+                           active={this.state.currentRemote === remote}
+                           onClick={() => this.setState({currentRemote: remote})}>
                     {remote.name}
                 </Menu.Item>
             );
 
             remotes.push(
                 <div style={this.state.currentRemote !== remote ? {display: 'none'} : null} key={remote.name}>
-                    <Remote path={remote.path} />
+                    <Remote path={remote.path}/>
                 </div>
             )
         });

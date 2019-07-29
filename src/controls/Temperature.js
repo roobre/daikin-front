@@ -25,7 +25,7 @@ class Temperature extends Component {
                     <input type='number' value={this.props.currentTemp} onChange={(ev) => this.onInputChange(ev)}/>
                     <Button.Group size='big'>
                         <Button icon='plus' onClick={() => this.changeTemp(1)}/>
-                        <Button icon='minus'  onClick={() => this.changeTemp(-1)}/>
+                        <Button icon='minus' onClick={() => this.changeTemp(-1)}/>
                     </Button.Group>
                 </Input>
             </Grid.Column>

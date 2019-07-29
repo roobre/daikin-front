@@ -1,0 +1,44 @@
+{
+  "livingroom-state": {
+    "mode": "fan",
+    "fanSpeed": -1,
+    "temp": 20,
+    "swing": {
+      "vertical": true,
+      "horizontal": true
+    },
+    "powered": true
+  },
+  "livingroom-capabilities": {
+    "modes": [
+      "cool",
+      "dry",
+      "fan"
+    ],
+    "swing": {
+      "vertical": true,
+      "horizontal": false
+    }
+  },
+  "bedroom-state": {
+    "mode": "cool",
+    "fanSpeed": -2,
+    "temp": 24,
+    "swing": {
+      "vertical": false,
+      "horizontal": true
+    },
+    "powered": true
+  },
+  "bedroom-capabilities": {
+    "modes": [
+      "cool",
+      "heat",
+      "fan"
+    ],
+    "swing": {
+      "vertical": true,
+      "horizontal": true
+    }
+  }
+}
