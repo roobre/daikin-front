@@ -11,7 +11,7 @@ class Temperature extends Component {
     onInputChange(ev) {
         const val = ev.target.value;
         if (val.length !== 0) {
-            this.props.setTemp(parseInt(val))
+            this.props.setTemp(parseInt(val, 10))
         } else {
             this.props.setTemp(0)
         }
