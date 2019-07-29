@@ -5,7 +5,7 @@ import {Button, Grid, Icon} from "semantic-ui-react";
 class Swing extends Component {
     render() {
         let swingV, swingH = null;
-        if (this.props.swingCapabilities.vertical) {
+        if (!this.props.swingCapabilities || this.props.swingCapabilities.vertical) {
             swingV = (
                 <Grid.Column stretched>
                     <Button primary={this.props.swingV} onClick={() => this.props.setSwing(!this.props.swingV, this.props.swingH)}
@@ -13,7 +13,7 @@ class Swing extends Component {
                 </Grid.Column>
             )
         }
-        if (this.props.swingCapabilities.horizontal) {
+        if (!this.props.swingCapabilities || this.props.swingCapabilities.horizontal) {
             swingH = (
                 <Grid.Column stretched>
                     <Button primary={this.props.swingH} onClick={() => this.props.setSwing(this.props.swingV, !this.props.swingH)}
