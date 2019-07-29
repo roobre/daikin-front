@@ -32,9 +32,20 @@ class Mode extends Component {
     ];
 
     render() {
+        let opts = [];
+        if (this.props.modeCapabilities != null) {
+            for (const opt in this.btnOpts) {
+                if (this.props.modeCapabilities.indexOf(this.btnOpts[opt].value) >= 0) {
+                    opts.push(this.btnOpts[opt])
+                }
+            }
+        } else {
+            opts = this.btnOpts;
+        }
+
         return (
             <Grid.Column width={16} stretched>
-                <ToggleButtonGroup size='large' options={this.btnOpts}
+                <ToggleButtonGroup size='large' options={opts}
                                    current={this.props.currentMode}
                                    onChange={this.props.setMode}/>
             </Grid.Column>
@@ -44,7 +55,8 @@ class Mode extends Component {
 
 Mode.propTypes = {
     currentMode: PropTypes.string,
-    setMode: PropTypes.func
+    setMode: PropTypes.func,
+    modeCapabilities: PropTypes.arrayOf(PropTypes.string)
 };
 
 export default Mode;
