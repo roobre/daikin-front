@@ -46,17 +46,13 @@ class Remote extends Component {
         if (this.state.ac != null) {
             controls = (
                 <Grid>
-                    <Mode key='mode'
-                          currentMode={this.state.ac.mode}
+                    <Mode currentMode={this.state.ac.mode}
                           setMode={(mode) => this.pushState({mode: mode})}/>
-                    <FanSpeed key='fs'
-                              currentSpeed={this.state.ac.fanSpeed}
+                    <FanSpeed currentSpeed={this.state.ac.fanSpeed}
                               setSpeed={(speed) => this.pushState({fanSpeed: speed})}/>
-                    <Temperature key='temp'
-                                 currentTemp={this.state.ac.temp}
+                    <Temperature currentTemp={this.state.ac.temp}
                                  setTemp={(temp) => this.pushState({temp: temp})}/>
-                    <Swing key='swing'
-                           swingV={this.state.ac.swing.vertical} swingH={this.state.ac.swing.horizontal}
+                    <Swing swingV={this.state.ac.swing.vertical} swingH={this.state.ac.swing.horizontal}
                            setSwing={(v, h) => this.pushState({swing: {vertical: v, horizontal: h}})}/>
                     <Grid.Column key='power' width={16} stretched>
                         <Button color={this.state.ac.powered ? 'red' : 'green'} icon='power'
