@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Grid, Button, Segment} from 'semantic-ui-react'
+import {Button, Grid, Segment} from 'semantic-ui-react'
 import './controls/Mode'
 import './App.css'
 import Mode from "./controls/Mode";

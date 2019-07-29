@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Button, Input} from "semantic-ui-react";
+import {Button} from "semantic-ui-react";
 import PropTypes from "prop-types";
 
 function ToggleButton(props) {
