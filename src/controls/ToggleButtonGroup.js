@@ -47,5 +47,5 @@ ToggleButtonGroup.propTypes = {
     current: PropTypes.any,
 };
 
-export {ToggleButton, ToggleButtonGroup};
-export default ToggleButton;
+export {ToggleButtonGroup};
+export default ToggleButtonGroup;
