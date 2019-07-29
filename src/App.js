@@ -7,27 +7,42 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        this.remotes = {
-            livingroom: <Remote path='livingRoom'/>,
-            dorm: <Remote path='dorm'/>
-        };
+        // TODO: LocalStorage
+        this.remotes = [
+            {
+                name: 'Salón',
+                path: 'livingroom'
+            },
+            {
+                name: 'Dormitorio',
+                path: 'bedroom'
+            }
+        ];
 
         this.state = {
-            currentRemote: this.remotes.livingroom
+            currentRemote: this.remotes[0]
         }
     }
 
     render() {
+        let remoteMenuItems = [];
         let remotes = [];
 
-        // TODO: React does not keep unrendered components in memory, so I use this ugly hack. It must be a better way to do this
-        for (let remote in this.remotes) {
+        this.remotes.forEach(remote => {
+            remoteMenuItems.push(
+                <Menu.Item key={remote.name + '|' + remote.path}
+                    active={this.state.currentRemote === remote}
+                    onClick={() => this.setState({currentRemote: remote})}>
+                    {remote.name}
+                </Menu.Item>
+            );
+
             remotes.push(
-                <div style={this.state.currentRemote !== this.remotes[remote] ? {display: 'none'} : null} key={remote}>
-                    {this.remotes[remote]}
+                <div style={this.state.currentRemote !== remote ? {display: 'none'} : null} key={remote.name}>
+                    <Remote path={remote.path} />
                 </div>
             )
-        }
+        });
 
         return (
             <Container style={{marginTop: '1em'}}>
@@ -41,16 +56,7 @@ class App extends Component {
                     </Grid.Column>
                 </Grid>
                 <Menu pointing secondary>
-                    <Menu.Item
-                        active={this.state.currentRemote === this.remotes.livingroom}
-                        onClick={() => this.setState({currentRemote: this.remotes.livingroom})}>
-                        Salón
-                    </Menu.Item>
-                    <Menu.Item
-                        active={this.state.currentRemote === this.remotes.dorm}
-                        onClick={() => this.setState({currentRemote: this.remotes.dorm})}>
-                        Dormitorio
-                    </Menu.Item>
+                    {remoteMenuItems}
                 </Menu>
                 {remotes}
             </Container>
