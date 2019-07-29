@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Grid} from "semantic-ui-react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFan} from "@fortawesome/free-solid-svg-icons";
-import {ToggleButtonGroup} from "./ToggleButton";
+import {ToggleButtonGroup} from "./ToggleButtonGroup";
 
 const sleepSpeed = -1;
 const autoSpeed = -2;

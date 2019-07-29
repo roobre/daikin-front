@@ -2,13 +2,6 @@ import React, {Component} from 'react'
 import {Button} from "semantic-ui-react";
 import PropTypes from "prop-types";
 
-function ToggleButton(props) {
-    const {own, current, setter, children, ...other} = props;
-    return (
-        <Button primary={current === own} onClick={() => setter(own)} {...other}>{children}</Button>
-    )
-}
-
 class ToggleButtonGroup extends Component {
     state = {
         current: null

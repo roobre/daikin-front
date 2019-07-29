@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {Grid} from "semantic-ui-react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFan, faTintSlash} from "@fortawesome/free-solid-svg-icons";
-import './ToggleButton'
-import {ToggleButtonGroup} from "./ToggleButton";
+import './ToggleButtonGroup'
+import {ToggleButtonGroup} from "./ToggleButtonGroup";
 
 const fanMode = 'fan';
 const coolMode = 'cool';
