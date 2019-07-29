@@ -32,15 +32,9 @@ class Mode extends Component {
     ];
 
     render() {
-        let opts = [];
+        let opts = this.btnOpts;
         if (this.props.modeCapabilities != null) {
-            for (const opt in this.btnOpts) {
-                if (this.props.modeCapabilities.indexOf(this.btnOpts[opt].value) >= 0) {
-                    opts.push(this.btnOpts[opt])
-                }
-            }
-        } else {
-            opts = this.btnOpts;
+            opts = this.btnOpts.filter(opt => this.props.modeCapabilities.indexOf(opt.value) >= 0);
         }
 
         return (
