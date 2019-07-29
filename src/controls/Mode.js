@@ -15,7 +15,7 @@ class Mode extends Component {
     btnOpts = [
         {
             value: heatMode,
-            icon: 'fire'
+            icon: 'sun'
         },
         {
             value: drierMode,
