@@ -24,7 +24,8 @@ class Temperature extends Component {
                     <Label><Icon name='thermometer' fitted/></Label>
                     <input type='number' value={this.props.currentTemp} onChange={(ev) => this.onInputChange(ev)}/>
                     <Button.Group size='big'>
-                        <Button icon='plus' onClick={() => this.changeTemp(1)}/>
+                        <Button icon='plus' onClick={() => this.changeTemp(1)}
+                                style={{borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}/>
                         <Button icon='minus' onClick={() => this.changeTemp(-1)}/>
                     </Button.Group>
                 </Input>
