@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import Profile from "./controls/Profile";
 
 class Remote extends Component {
-    static backend = 'http://localhost:3001';
+    static backend = 'http://' + window.location.hostname + ':3001';
     static statePath = 'state';
     static capabilitiesPath = 'capabilities';
 
@@ -79,7 +79,7 @@ class Remote extends Component {
                         <Button color={this.state.ac.powered ? 'red' : 'green'} icon='power'
                                 onClick={() => this.pushState({powered: !this.state.ac.powered})}/>
                     </Grid.Column>
-                    <Profile acState={this.state.ac} pushState={this.pushState} />
+                    <Profile acState={this.state.ac} pushState={state => this.pushState(state)}/>
                 </Grid>
             )
         } else {
