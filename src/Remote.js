@@ -13,7 +13,7 @@ class Remote extends Component {
     static statePath = 'state';
     static capabilitiesPath = 'capabilities';
 
-    componentWillMount() {
+    componentDidMount() {
         fetch(Remote.backend + '/' + this.props.path + '/' + Remote.capabilitiesPath)
             .then(response => response.json())
             .then(json => this.setState({capabilities: json}))
