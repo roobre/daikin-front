@@ -7,6 +7,7 @@ import FanSpeed from "./controls/FanSpeed";
 import Temperature from './controls/Temperature';
 import Swing from "./controls/Swing";
 import PropTypes from "prop-types";
+import Profile from "./controls/Profile";
 
 class Remote extends Component {
     static backend = 'http://localhost:3001';
@@ -78,6 +79,7 @@ class Remote extends Component {
                         <Button color={this.state.ac.powered ? 'red' : 'green'} icon='power'
                                 onClick={() => this.pushState({powered: !this.state.ac.powered})}/>
                     </Grid.Column>
+                    <Profile acState={this.state.ac} pushState={this.pushState} />
                 </Grid>
             )
         } else {
